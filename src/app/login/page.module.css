@@ -36,7 +36,7 @@
 
 .errorMessage {
     margin-top: 0.4rem;
-    color: #c32d00;
+    color: var(--danger);
     font-size: 0.8rem;
     display: flex;
     align-items: center;
@@ -49,17 +49,6 @@
 .additionalActions {
     display: flex;
     justify-content: space-between;
-}
-
-.linkButton {
-    appearance: none;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    background-color: transparent;
-    &:hover {
-        text-decoration: underline;
-    }
 }
 
 .rememberMe {

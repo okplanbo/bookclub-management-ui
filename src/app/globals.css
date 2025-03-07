@@ -4,13 +4,14 @@
     --background: #fff9f0;
     --foreground: #171717;
     --primary: #795548;
-    --linkColor: #7e440b;
-
-    font-size: 1.2em;
+    --danger: #a72700;
+    --link: #7e440b;
 
     --mobile: 600px;
 
     --z-index-top: 1000;
+
+    font-size: 1.2em;
 }
 
 html,
@@ -64,7 +65,7 @@ noscript {
 }
 
 a {
-    color: var(--linkColor);
+    color: var(--link);
     text-decoration: underline;
 }
 
