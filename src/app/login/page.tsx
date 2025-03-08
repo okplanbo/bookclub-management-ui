@@ -1,15 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+
 import styles from './page.module.css';
 import { useState } from 'react';
 import { validateEmail } from '@/utils';
-import { basePath } from '../../../next.config';
-
-const iconPath = `${basePath ?? ''}/assets/warning.svg`;
+import EmailInput from '@/components/EmailInput/EmailInput';
+import PasswordInput from '@/components/PasswordInput/PasswordInput';
 
 export default function LoginPage() {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [invalidEmailMessage, setInvalidEmailMessage] = useState<string>();
     const [invalidPasswordMessage, setInvalidPasswordMessage] =
         useState<string>();
@@ -54,6 +55,14 @@ export default function LoginPage() {
         console.log(payload);
     };
 
+    const handleEmailChange = (value: string) => {
+        setEmail(value);
+    }
+
+    const handlePasswordChange = (value: string) => {
+        setPassword(value);
+    }
+
     return (
         <main className={styles.container}>
             <h1 id='login-heading'>Sign in to BookNook</h1>
@@ -63,50 +72,16 @@ export default function LoginPage() {
                 noValidate
                 aria-labelledby='login-heading'
             >
-                <div className={styles.inputGroup}>
-                    <label htmlFor='email'>Email Address</label>
-                    <input
-                        type='email'
-                        id='email'
-                        name='email'
-                        required
-                        aria-required='true'
-                    />
-                    {invalidEmailMessage && (
-                        <div className={styles.errorMessage} aria-live='polite'>
-                            <Image
-                                src={iconPath}
-                                alt=''
-                                role='presentation'
-                                width={16}
-                                height={16}
-                            />
-                            {invalidEmailMessage}
-                        </div>
-                    )}
-                </div>
-                <div className={styles.inputGroup}>
-                    <label htmlFor='password'>Password</label>
-                    <input
-                        type='password'
-                        id='password'
-                        name='password'
-                        required
-                        aria-required='true'
-                    />
-                    {invalidPasswordMessage && (
-                        <div className={styles.errorMessage} aria-live='polite'>
-                            <Image
-                                src={iconPath}
-                                alt=''
-                                role='presentation'
-                                width={16}
-                                height={16}
-                            />
-                            {invalidPasswordMessage}
-                        </div>
-                    )}
-                </div>
+                <EmailInput
+                    value={email}
+                    onChange={handleEmailChange}
+                    errorMessage={invalidEmailMessage}
+                />
+                <PasswordInput
+                    value={password}
+                    onChange={handlePasswordChange}
+                    errorMessage={invalidPasswordMessage}
+                />
                 <div className={styles.additionalActions}>
                     <div className={styles.rememberMe}>
                         <input
@@ -116,7 +91,7 @@ export default function LoginPage() {
                         />
                         <label htmlFor='remember-me'>Remember me</label>
                     </div>
-                    <Link className={styles.slinkButton} href='/password-reset'>
+                    <Link href='/password-reset'>
                         Forgot password?
                     </Link>
                 </div>
@@ -127,6 +102,9 @@ export default function LoginPage() {
                     Don&apos;t have account yet?{' '}
                     <Link href='/signup'>Register</Link>
                 </div>
+                {/* Cases after sending form data: 'Password is incorrect'
+                'Email is incorrect' or 'User not found'
+                'Generic server error', 'Connection error' */}
             </form>
         </main>
     );

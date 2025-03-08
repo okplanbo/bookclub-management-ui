@@ -1,0 +1,27 @@
+@mixin inputContainer {
+    & > label,
+    & > input {
+        width: 100%;
+    }
+    & > label {
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+    & > input {
+        padding: 0.3rem;
+        border: 1px solid #0005;
+        border-radius: 0.4rem;
+    }
+}
+
+@mixin inputError {
+    margin-top: 0.4rem;
+    color: var(--danger);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    & > img {
+        margin-bottom: 0.1rem;
+    }
+}

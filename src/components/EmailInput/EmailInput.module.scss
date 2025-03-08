@@ -1,0 +1,9 @@
+@import '../../app/mixins.scss';
+
+.emailInputContainer {
+    @include inputContainer;
+}
+
+.errorMessage {
+    @include inputError;
+}
